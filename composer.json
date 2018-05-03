@@ -18,6 +18,9 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
+        },
+        "file": {
+            "App/Http/Helpers/JwtHelper.php"
         }
     },
     "autoload-dev": {

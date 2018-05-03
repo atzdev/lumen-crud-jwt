@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Firebase\JWT\JWT;
+use App\Http\Helpers\JwtHelper;
 use Validator;
 use App\User;
 
@@ -54,7 +55,13 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
+        dd($request->all());
         $user = User::find($request->auth->id);
+
+
+        $user->name = !empty($request->name)? $request->name : $user->name;
+
+        $user->save();
 
         return response()->json($user);
     }
@@ -77,5 +84,7 @@ class UsersController extends Controller
 
         return JWT::encode($payload, env('JWT_SECRET'));
     }
+
+    
 
 }
