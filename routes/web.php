@@ -26,9 +26,9 @@ $router->group(['prefix' => 'api/v1'],function() use($router) {
 
 		$router->get('all', 'UsersController@index');
 		$router->get('show', 'UsersController@show');
-		$router->post('user', 'UsersController@create');
+		$router->post('user', 'UsersController@create');  // ** auth:api except
 		$router->put('user', 'UsersController@update');
-		$router->delete('delete', 'UsersController@destroy');
+		$router->delete('delete/{id}', 'UsersController@destroy');
 		//$router->post('users', function(){
 			//$users = \App\User::all();
 			//return response()->json($users);

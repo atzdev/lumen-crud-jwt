@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Firebase\JWT\JWT;
-use App\Http\Helpers\JwtHelper;
+use App\Http\Helpers\JwtHelper as JWTHelper;
 use Validator;
 use App\User;
 
@@ -55,7 +55,7 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $user = User::find($request->auth->id);
 
 
@@ -66,9 +66,14 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
-        
+        $user = User::find($id);
+        $user->delete();
+
+        return response()->json([
+            'data' => 'User id: '.$id.' deleted.'
+        ]);
     }
 
     public function jwt(User $user)
@@ -85,6 +90,6 @@ class UsersController extends Controller
         return JWT::encode($payload, env('JWT_SECRET'));
     }
 
-    
+
 
 }
